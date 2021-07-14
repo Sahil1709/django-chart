@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% block content %}
+<div class="ui container">
+  <form class="ui form segment success">
+    <p>Tell Us About Yourself</p>
+    <div class="two fields">
+      <div class="field">
+        <label>Name</label>
+        <input placeholder="First Name" name="name" type="text" />
+      </div>
+      <div class="field">
+        <label>Gender</label>
+        <div class="ui dropdown selection gender" tabindex="0">
+          <select name="gender">
+            <option value="">Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option></select
+          ><i class="dropdown icon"></i>
+          <div class="default text">Select Gender</div>
+          <div class="menu transition hidden" tabindex="-1">
+            <div class="item active selected" data-value="male">Male</div>
+            <div class="item" data-value="female">Female</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <label>Username</label>
+        <input placeholder="Username" name="username" type="text" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Skills</label>
+      <div class="ui dropdown selection multiple skills" tabindex="0">
+        <select name="skills" multiple="">
+          <option value="">Select Skills</option>
+          <option value="css">CSS</option>
+          <option value="html">HTML</option>
+          <option value="javascript">Javascript</option>
+          <option value="design">Graphic Design</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="mech">Mechanical Engineering</option>
+          <option value="repair">Kitchen Repair</option></select
+        ><i class="dropdown icon"></i>
+        <div class="default text">Select Skills</div>
+        <div class="menu transition hidden" tabindex="-1">
+          <div class="item selected" data-value="css">CSS</div>
+          <div class="item" data-value="html">HTML</div>
+          <div class="item" data-value="javascript">Javascript</div>
+          <div class="item" data-value="design">Graphic Design</div>
+          <div class="item" data-value="plumbing">Plumbing</div>
+          <div class="item" data-value="mech">Mechanical Engineering</div>
+          <div class="item" data-value="repair">Kitchen Repair</div>
+        </div>
+      </div>
+    </div>
+    <div class="inline field">
+      <div class="ui checkbox checked">
+        <input type="checkbox" name="terms" tabindex="0" class="hidden" />
+        <label>I agree to the terms and conditions</label>
+      </div>
+    </div>
+    <div class="ui primary submit button" id="submit">Submit</div>
+    <div class="ui error message">
+      <ul class="list">
+        <li>Your username must be at least 5 characters</li>
+      </ul>
+    </div>
+  </form>
+</div>
+
+{% endblock content %} {% block scripts %}
+<script>
+  $(".ui.checkbox").checkbox();
+  $(".ui.dropdown").dropdown();
+  $(".ui.form").form({
+    fields: {
+      name: "empty",
+      gender: "empty",
+      username: "empty",
+      password: ["minLength[6]", "empty"],
+      skills: ["minCount[2]", "empty"],
+      terms: "checked",
+    },
+  });
+  $("#submit").click(function () {
+    const val = $(".ui.dropdown.skills").dropdown("get value");
+    console.log(val);
+  });
+</script>
+{% endblock scripts %}

@@ -10,4 +10,9 @@ class ClubChartView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["qs"] = Club.objects.all()
         return context
-    
+
+def home(request):
+    return render(request,'home.html')
+
+def register(request):
+    return render(request, 'register.html')   

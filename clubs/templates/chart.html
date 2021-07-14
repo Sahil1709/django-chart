@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% block title %} Club Chart {% endblock title %}
-{%block scripts %}
+{% extends 'base.html' %} {% block title %} Club Chart {% endblock title %} {%block scripts %}
 <script>
   $(document).ready(function () {
     var ctx = document.getElementById("myChart").getContext("2d");
@@ -43,8 +42,8 @@
 </script>
 {%endblock scripts%} {%block content%}
 <div class="ui container">
-<h1>Dynamic Chart</h1>
-<canvas id="myChart" width="400" height="200"></canvas>
+  <h1>Dynamic Chart</h1>
+  <canvas id="myChart" width="400" height="200"></canvas>
 </div>
 
 {%endblock content%}
