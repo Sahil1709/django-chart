@@ -32,7 +32,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'base.css' %}" />
-
-    <title>{%block title%} {%endblock title%}</title>
+    <title>{%block title%} {{pagename}} {%endblock title%}</title>
   </head>
 </html>

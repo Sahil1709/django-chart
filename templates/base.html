@@ -2,9 +2,13 @@
 <body>
   <div class="ui menu">
     <div class="header item">Our Company</div>
-    <a class="item active" href="/"> Home</a>
-    <a class="item" href="/clubs"> Clubs Chart </a>
-    <a class="item" href="/register"> Sign Up </a>
+    <a class="item {% if request.path == '/' %}active{% endif %}" href="/"> Home</a>
+    <a class="item {% if request.path == '/clubs/' %}active{% endif %}" href="/clubs">
+      Clubs Chart
+    </a>
+    <a class="item {% if request.path == '/register/' %}active{% endif %}" href="/register">
+      Sign Up
+    </a>
   </div>
   {% block content %} {% endblock content %} {% block scripts %} {% endblock scripts %}
 </body>

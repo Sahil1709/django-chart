@@ -8,11 +8,13 @@ class ClubChartView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["chartname"] = "Clubs Chart"
+        context["pagename"] = "Clubs"
         context["qs"] = Club.objects.all()
         return context
 
 def home(request):
-    return render(request,'home.html')
+    return render(request,'home.html',{"pagename":"Homepage", "author":"Sahil Gupta"})
 
 def register(request):
-    return render(request, 'register.html')   
+    return render(request, 'register.html', {"pagename":"SignUp","author":"Sahil Gupta"})   
