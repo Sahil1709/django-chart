@@ -1,14 +1,31 @@
 {% include 'header.html' %}
 <body>
-  <div class="ui menu">
-    <div class="header item">Our Company</div>
-    <a class="item {% if request.path == '/' %}active{% endif %}" href="/"> Home</a>
-    <a class="item {% if request.path == '/clubs/' %}active{% endif %}" href="/clubs">
-      Clubs Chart
-    </a>
-    <a class="item {% if request.path == '/register/' %}active{% endif %}" href="/register">
-      Sign Up
-    </a>
+  <div class="ui secondary pointing menu">
+    <div class="ui container">
+      <div class="header item">Dashboard</div>
+      <a class="item {% if request.path == '/' %}active{% endif %}" href="/"> Home</a>
+      <a class="item {% if request.path == '/clubs/' %}active{% endif %}" href="/clubs">
+        Clubs Chart
+      </a>
+      <div class="right menu">
+        {% if request.user.is_authenticated %}
+        <a class="item {% if request.path == '/profile/' %}active{% endif %}" href="">
+          Hello, {{user.username}}</a
+        >
+        <form action="/logout/" method="post">
+          {% csrf_token %}
+          <button class="ui button" type="submit">Logout <i class="sign-out icon"></i></button>
+        </form>
+
+        {% else %}
+        <a class="item {% if request.path == '/register/' %}active{% endif %}" href="/register">
+          Sign Up </a
+        ><a class="ui item {% if request.path == '/login/' %}active{% endif %}" href="/admin">
+          Login
+        </a>
+        {% endif %}
+      </div>
+    </div>
   </div>
   {% block content %} {% endblock content %} {% block scripts %} {% endblock scripts %}
 </body>

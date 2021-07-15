@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
+from django.contrib.auth import login,logout
 from .models import Club
 
 # Create your views here.
@@ -18,3 +19,8 @@ def home(request):
 
 def register(request):
     return render(request, 'register.html', {"pagename":"SignUp","author":"Sahil Gupta"})   
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect("/register")
