@@ -1,5 +1,36 @@
 {% include 'header.html' %}
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  main {
+    transition: background 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  main p {
+    align-self: center;
+    font-family: sans-serif;
+    transition: color 0.3s ease;
+  }
+  /*TOGGLE COLORS*/
+  .dark {
+    background: #545454;
+    color: #efefef;
+  }
+  p {
+    background: none !important;
+  }
+</style>
 <body>
+  <main id="main">
+    <p>Click to toggle dark mode</p>
+    <label class="switch">
+      <input type="checkbox" class="hidden" onclick="darkLight()" id="checkBox" />
+    </label>
+  </main>
   <div class="ui secondary pointing menu">
     <div class="ui container">
       <div class="header item">Dashboard</div>
@@ -8,13 +39,27 @@
         Clubs Chart
       </a>
       <div class="right menu">
+        {% comment %} <i class="sun icon"></i> {% endcomment %}
+        <div class="item">
+          <div class="ui form">
+            <div class="inline field">
+              <div class="ui slider checkbox">
+                <input id="checkBox" type="checkbox" tabindex="0" class="hidden" />
+                <label for=""><i class="moon icon"></i></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {% if request.user.is_authenticated %}
-        <a class="item {% if request.path == '/profile/' %}active{% endif %}" href="">
+        <a class="item {% if request.path == '/profile/' %}active{% endif %}" href="/profile">
           Hello, {{user.username}}</a
         >
         <form action="/logout/" method="post">
           {% csrf_token %}
-          <button class="ui button" type="submit">Logout <i class="sign-out icon"></i></button>
+          <button class="ui right labeled icon button" type="submit">
+            Logout <i class="sign-out icon"></i>
+          </button>
         </form>
 
         {% else %}
@@ -27,6 +72,29 @@
       </div>
     </div>
   </div>
+  <script>
+    $(".ui.slider").checkbox();
+
+    $("#main").toggleClass(localStorage.toggled);
+
+    function darkLight() {
+      /*DARK CLASS*/
+      if (localStorage.toggled != "dark") {
+        $("#main, p").toggleClass("dark", true);
+        localStorage.toggled = "dark";
+      } else {
+        $("#main, p").toggleClass("dark", false);
+        localStorage.toggled = "";
+      }
+    }
+
+    /*Add 'checked' property to input if background == dark*/
+    if ($("main").hasClass("dark")) {
+      $("#checkBox").prop("checked", true);
+    } else {
+      $("#checkBox").prop("checked", false);
+    }
+  </script>
   {% block content %} {% endblock content %} {% block scripts %} {% endblock scripts %}
 </body>
 {% include 'footer.html' %}

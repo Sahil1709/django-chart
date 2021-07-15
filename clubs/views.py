@@ -24,3 +24,6 @@ def logout_view(request):
     if request.method == "POST":
         logout(request)
         return redirect("/register")
+
+def profile(request):
+    return render(request, 'profile.html', {"pagename":"Profile","author":"Sahil Gupta"})  
