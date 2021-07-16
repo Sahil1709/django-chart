@@ -10,6 +10,7 @@ class ClubChartView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pagename"] = "Clubs Chart"
+        context["author"] = "Sahil Gupta"
         context["qs"] = Club.objects.all()
         return context
 
@@ -22,7 +23,7 @@ def register(request):
 def logout_view(request):
     if request.method == "POST":
         logout(request)
-        return redirect("/register")
+        return redirect("/")
 
 def profile(request):
     return render(request, 'profile.html', {"pagename":"Profile","author":"Sahil Gupta"})  

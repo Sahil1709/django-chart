@@ -44,7 +44,7 @@
           <div class="ui form">
             <div class="inline field">
               <div class="ui slider checkbox">
-                <input id="checkBox" type="checkbox" tabindex="0" class="hidden" />
+                <input type="checkbox" tabindex="0" class="hidden" />
                 <label for=""><i class="moon icon"></i></label>
               </div>
             </div>
@@ -75,8 +75,16 @@
   <script>
     $(".ui.slider").checkbox();
 
-    $("#main").toggleClass(localStorage.toggled);
+    if ($(".ui.slider").checkbox("is checked")) {
+      $("#main, p").toggleClass("dark", true);
+      localStorage.toggled = "dark";
+    }
+    if ($(".ui.slider").checkbox("is unchecked")) {
+      $("#main, p").toggleClass("dark", false);
+      localStorage.toggled = "";
+    }
 
+    $("#main").toggleClass(localStorage.toggled);
     function darkLight() {
       /*DARK CLASS*/
       if (localStorage.toggled != "dark") {
@@ -91,8 +99,14 @@
     /*Add 'checked' property to input if background == dark*/
     if ($("main").hasClass("dark")) {
       $("#checkBox").prop("checked", true);
+      $(".ui.slider").checkbox("set checked");
     } else {
       $("#checkBox").prop("checked", false);
+      $(".ui.slider").checkbox("set unchecked");
+    }
+
+    function handleClick(cb) {
+      display("Clicked, new value = " + cb.checked);
     }
   </script>
   {% block content %} {% endblock content %} {% block scripts %} {% endblock scripts %}
